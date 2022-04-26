@@ -1,0 +1,25 @@
+{% extends "../layouts/base.html" %}
+{% block title %} Login {% endblock %}
+
+{% block custom_css %}
+=
+{% endblock%}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Personal Profile</h2>
+    <div class="row">
+        <div class="card">
+            <h4>Name: {{data.first_name}} {{data.middle_name}} {{data.last_name}}</h4>
+            <h4>Date of birth: {{data.birth_date}}</h4>
+            <h4>Address: {{data.address}}</h4>
+            <h4>Contact Number: {{data.contact_number}}</h4>
+            <h4>Occupation: {{data.occupation}}</h4>
+        </div>
+    </div>
+
+        
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "../layouts/base.html" %}
+{% block title %} Login {% endblock %}
+
+{% block custom_css %}
+
+{% endblock%}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-3 offset-1 mt-3">
+        <h4>Add your Portfolio</h4>
+        <form action=" " method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-primary" value="Add">
+        </form>
+    </div>
+    <div class="col-sm-7 offset-1 mt-3">
+        <h4>Show Portfolio</h4>
+    {% if show %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">Objective</th>
+            <th scope="col">Assets</th>
+            <th scope="col">Liabilities</th>
+            <th scope="col">Balance</th>
+            <th scope="col">Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+        {% for sh in show %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{sh.date}}</td>
+            <td>{{sh.objective}}</td>
+            <td>{{sh.income}}</td>
+            <td>{{sh.expense}}</td>
+            <td></td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{% url 'update_portfolio' sh.id %}">Edit</a>
+                <form action="{% url 'delete_portfolio' sh.id %}" method="POST" class="d-inline">
+                  {% csrf_token %}
+                <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                </form>
+            </td>
+            
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+        <h4 class="text-center alert-warning">No records</h4>
+    {% endif %}
+    </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-6 col-sm-4">Income</div>
+    <div class="col-6 col-sm-4">Expense</div>
+
+    <!-- Force next columns to break to new line at md breakpoint and up -->
+    <div class="w-100 d-none d-md-block"></div>
+
+    <div class="col-6 col-sm-4">value</div>
+    <div class="col-6 col-sm-4">value</div>
+  </div>
+</div>
+{% endblock %}
